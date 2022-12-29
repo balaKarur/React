@@ -10,6 +10,19 @@ function App()
   const [users,setUsers] = useState([]);
   const [items,setItems] = useState([]);
   const [comments,setComments] = useState([]);
+  const [width,setWidth] = useState(() => window.innerWidth);
+  const handleResize = () => {
+    setWidth(window.innerWidth)
+  }
+    useEffect(() => {
+      console.log("addEventListener")
+      window.addEventListener("resize",handleResize);
+      return () =>{
+        //From second time return function will be invoked to remove teh resources, when ever width state updated
+        console.log("removeEventListener")
+        window.removeEventListener("resize",handleResize); 
+      }
+  },[width])
   //const [count,setCount] = useState([1]);
   //useState initialization Will be called only once at time of page load, if we defined function defination 
   //we can update the state many time with the use of setCount function
@@ -64,6 +77,7 @@ function App()
   
   return (
     <div>
+        <div>Window Current width : {width}</div>
         <button onClick={() => updateState('posts')}> {posts.length} Posts</button>
         <button onClick={() =>updateState('users')}>{users.length} Users</button>
         <button onClick={() =>updateState('comments')}>{comments.length} Comments</button>
