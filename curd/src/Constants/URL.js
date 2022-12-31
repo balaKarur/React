@@ -1,0 +1,1 @@
+export const REST_API = "https://63b01c066a74151a1bb99cb9.mockapi.io/User"

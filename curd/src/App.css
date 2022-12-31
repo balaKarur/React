@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: white;
+  background-color: black;
+}
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.field , button{
+  margin-top: 20px;
+}
+label{
+  margin-right: 20px;
+}
+.footer{
+  display: flex;
+  flex-direction: row;
+}
