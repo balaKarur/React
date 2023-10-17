@@ -1,0 +1,131 @@
+React Basic:
+    hooks are added in Reactv16.8 
+    This allows us to use react feature in functional component
+    without using class component.
+    Ex: state of a component
+    hooks wont work inside class.
+ --------------------
+ why hooks:
+    ->need to understand how this keyword works in JS
+    ->remember to bind event handlers in class component
+    ->class do'nt minify very well and make hot reloading very unreliable
+--------------------------------------
+1)TS(TS in React introduction)
+    1->With the static type checking , we can resolve some bugs while typing the code 
+    2->Its provides a way to describe the shape of an object hence providing better documentation 
+    3->Easy to understand and maintenance the large code base
+
+2)React basic
+    Q1:what is Type inference
+    if we not set any type , then the TS will detect automatically , based on its value .
+    function App():JXS.Element{
+        retrun (
+
+        )
+    }
+    here JXS.Element , this type will be automatically detected by TS
+3)Props passing from parent to child
+    1->String Props
+4)Number and boolean props,object and array
+    ->while passing number and boolean need to pass props inside curly bracket {}
+    EX:<Post title="you have message" count={2} isLoggedIn={isLogin}></Post>
+    object and array 
+    EX:<User  basicDetails={user} address={address}></User> in post.tsx
+
+5)Union Type props
+    1->All us to  check string type with specific string List 
+    parent:
+        let status ="loading";
+        status ="success";
+        status ="error"; 
+        <Status status="loading"></Status>
+
+        child:
+        type StatusProps = {
+            status:'loading'|'success'|'error'
+        }
+    2->Children props and optional props by mentioning ? next to prop
+        With the use of children props, we can pass as a props either  text content or React component 
+        -> <Heading>This is Heading</Heading> ->pass text content as a children props
+            type HeadingProps ={
+                children:string
+            }
+            function Heading(props:HeadingProps){
+                return(<div>{props.children} </div>)
+
+            }
+            export default Heading
+        -> passReact component  as a children props
+            <Oscar> <Heading>This is Heading</Heading></Oscar>
+        ->Optional Props:
+        type PostProps = {
+            title:string;
+            count?:number;
+            isLoggedIn:boolean
+        }
+        ->set default value to teh props
+        const {count = 0} = props;
+6)Event props:
+React.MouseEvent and React.ChangeEvent(button.txs and input.txs)
+type ButtonProps = {
+    handelClick:(event:React.MouseEvent<HTMLButtonElement>,id:number) => void;
+}
+type InputProps ={
+    handleOnChange:(event:React.ChangeEvent<HTMLInputElement>,text:string)=>void
+}
+7)Style Props: has to add 2 bracket
+    <Container styles={{border:'1px solid black',padding:'1rem'}}></Container>
+*8)Props and tips
+  ->  destructuring props:
+    function Input({value,handleOnChange}:InputProps){
+    }
+    ->Keep props type in separate file and export adn use it in component
+9)useState-hook
+useSate use to create state variable and action for that variable to update its value.
+ex: login and logout action
+
+10)useSate -future
+    using union operator to define type of state
+    const [user,setUser] = useState<AuthUser | null>(null)
+11)Using type assertion in useState
+    const [user,setUser] = useState<AuthUser>({} as AuthUser)
+    soon user object will be filled, and it wont be null
+12)UseReducer Hook for complex type state variable
+next state depend on previous state.
+const [state,dispatch] = useReducer(reducerFn,initialState)
+13)added strict Action type by applying union operation and
+    independent type for specific action
+    type UpdateAction ={
+        type:'increment'|'decrement'|'reset',
+        payload:number
+    }
+    type ResetAction ={
+        type:'reset',
+    }
+    type CounterAction = UpdateAction|ResetAction;
+
+    function reducer(state:CounterState,action:CounterAction){
+    }
+14)Usecontext hook
+    context provides a way to pass data through the component tree ,without passing props at each component
+    Can pass default context value while create context
+    ->Create The context ,outside and  top of teh component
+    ->Provide a context value
+    ->Consume the context value
+    in one component can use many context 
+    ex: themecontext and userContext
+15)Usecontext hook
+initially passing null value to the provider , based on condition , update the value form component
+ Ex: userContext.tsx
+16)UseEffect
+->useEffect has function as param 
+->UseEffect function will be invoked , while mounting ,updating state value and unmount component.
+16-a)useRef
+useRef use to refer the dom element to change the dom value.
+18)passing component as props (auth folder)
+<Private  isLoggedIn ={false} component={Profile} ></Private>
+Profile is component
+
+
+
+
