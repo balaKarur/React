@@ -1,3 +1,0 @@
-From this project you will learn all react concepts
-This project uses 
-vite+react+TS
