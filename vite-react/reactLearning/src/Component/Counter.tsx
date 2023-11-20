@@ -22,5 +22,3 @@ export const Counter = () => {
         </>
     )
 }
-12345
-1361015

@@ -71,7 +71,7 @@ so to avoid  same logic code in 2 different place we have to use useEffect hook.
 
 useEffect hook is replacement for **componentDidMount, componentDidUpdate and componentWillUnMount**
 
-->UseEffect hook will be invoked once the component rerendered , state updated 
+->UseEffect hook will be invoked once the component rerendered , state updated
 
 ->UseEffect will be called **Conditionally** when ever state variable chages
 
@@ -117,11 +117,11 @@ in one component can have **multipel useEffect** as per state variable .
 
 Context provides a way to pass data through the component tree , without passing as props manually at each level
 
-1. **Create Context from React and export** 
+1. **Create Context from React and export**
 
-    export const UserContext = React.createContext();
+   export const UserContext = React.createContext();
 
- **2.Define provider with value for parent component** 
+ **2.Define provider with value for parent component**
 
  <UserContext.Provider value="Bala">
 
@@ -129,15 +129,15 @@ Context provides a way to pass data through the component tree , without passing
 
     </UserContext.Provider>
 
-**3.Import the UserContext in grant child component** 
+**3.Import the UserContext in grant child component**
 
 import UserContext from "./app"
 
-**without useContext ->its very hard , if multiple context we have** 
+**without useContext ->its very hard , if multiple context we have**
 
 <UserContext.Consumer>
 
-{ 
+{
 
     user =>{
 
@@ -177,8 +177,106 @@ const companyC = useContext(CompanyContext)
 
 **useReducer:**
 
-->useReducer(reducerfn,*Initial state*)
-
-->newState = reducer(currentState,action)
+->newState = reducerfn(currentState,action/* **action can be string/object** */)
 
 ->useReducer returns a pair of values. [newState,dispatch]
+
+const initialState = 0;//**initialState can be  int /object**
+
+function **CounterUseReducer**() {
+
+->const [newState,dispatch] = useReducer(reducerfn,initialState)
+
+<buttononClick={() => dispatch("increment")}>Increment `</button>`
+
+**//dispatch function use to call reducer function**
+
+}
+
+useReducer -> local state management
+
+useReducer and useContext we can share the data between component without passing its hierarchy child component.
+
+this help to manage Global state
+
+#### When to Use useState and UseReducer
+
+| scenario                   | useState                 | useReducer                                                                   |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------------- |
+| Type of state variable     | boolean, string , number | object,Array                                                                 |
+| Number of state transition | 1 or 2                   | more then 3                                                                  |
+| Related state transation   | NO                       | yes                                                                          |
+| Business logic             | no business logic        | complex business logic                                                       |
+| Local vs global            | local                    | global<br />Reason with one dispatch method we can update any state variable |
+
+#### UseCallback
+
+usecallback is a hook , to optimize theperformance .When ever the componenet is rerender , all function will be initialized newly so to avoid, if we use usecallback hook, **it will cache the provided  function instance** incase if there is no changes in the dependencies, this will avoid initializing new function and imporve the perfromance.
+
+EX: const incrementCount =useCallback(() => {
+
+setCount(count+1);
+
+},[count]))
+
+incrementCount cache teh function
+
+`<span>{incrementCount()}</span>`
+
+#### UseMemo
+
+useMemo is a hook , it will **cache the result of the function** .incase if there is no changes in the dependencies.this will avoid initializing new function and reexecuting it and imporve the perfromance.
+
+
+const incrementCount =usemeno(() => {
+
+setCount(count+1);
+
+},[count]))
+
+`<span>{incrementCount}</span>`
+
+incrementCount cachec the result
+
+#### UseRef
+
+useRef is a hook , use to access the dom element.
+
+useEffect(() => {
+
+    inputRef.current?.focus();
+
+    },[])
+
+Name `<input </input>`
+
+useRef use to create generic container can hold mutable value.
+
+this generic container doesnot cause  rerender component, when data store changes,
+even this stored data will be remember ,even after other state variable caused a rerender of the component
+
+let timerRef= useRef();
+
+    useEffect(() => {
+
+    timerRef.current = setInterval(() => {
+
+    settimer(preState => preState+1);
+
+    },1000)
+
+<buttonref={timerRef}onClick={() => { cleartime()}}>Clear Timer `</button>`
+
+#### useImperativeHandle and useLayoutEffect and useDebugValue
+
+#### CustomHooks
+
+    A custome hook is a basic jsfunction whose name start with "use"
+
+    A custome hook can also call other hooks if required.
+
+    **why :**
+
+    to share logic ->its alternative to HOCs and Render props
+
+#### Question sharing common logic  HOC and Render Props

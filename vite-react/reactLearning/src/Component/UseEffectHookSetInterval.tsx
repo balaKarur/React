@@ -12,10 +12,10 @@ function UseEffectHookSetInterval() {
     }
     useEffect(() => {
         console.log("useEffect - tick");
-        const interval = setInterval(tick,1000);
+        //const interval = setInterval(tick,1000);
         return () => {
             console.log("useEffect - clearInterval");
-            clearInterval(interval);
+            //clearInterval(interval);
         }
     },[])
   return (
